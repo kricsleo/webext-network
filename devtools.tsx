@@ -1,5 +1,8 @@
 import fontPickerHTML from "url:./panels/network/index.html"
 
+import "~base.css"
+import "~style.css"
+
 chrome.devtools.panels.create(
   "Network Extra",
   null,

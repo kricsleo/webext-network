@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react'
 import { createRoot } from "react-dom/client"
+import RequestItem from './RequestItem'
+
+import "~base.css"
+import "~style.css"
 
 const FontPicker = () => {
   const [har, setHar] = useState<any>()
   const [listened, setListened] = useState(false)
+  const [requests, setRequests] = useState([])
   useEffect(() => {
-    const listerner = (details)  => {
-      if(!listened) {
-        setListened(true)
-      }
-      const cancel = details.url.indexOf("nabc") != -1
+    const listerner = (detail)  => {
+      setRequests(prev => [...prev, detail])
+      const cancel = detail.url.indexOf("nabc") != -1
       if(cancel) {
         const start = Date.now()
         while (Date.now() - start < 5000) {
         }
       }
-      return {cancel };
+      return { cancel };
     }
     chrome.webRequest.onBeforeRequest.addListener(
       listerner,
@@ -29,9 +32,9 @@ const FontPicker = () => {
   })
   return (
     <>
-      <h2>har</h2>
-      <p>listened: {listened ? 'true' : 'false'}</p>
-      <pre>{JSON.stringify(har, null, 2)}</pre>
+      <p className="border-2 border-sky-500">total: {requests.length}</p>
+      {requests.map(request => <RequestItem request={request} />)}
+      {/* <pre>{JSON.stringify(har, null, 2)}</pre> */}
     </>
   )
 }
