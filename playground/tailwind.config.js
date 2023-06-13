@@ -4,8 +4,7 @@ import { addDynamicIconSelectors } from '@iconify/tailwind';
 export default {
   mode: "jit",
   darkMode: "class",
-  // content: ["./**/*.tsx"],
-  purge: ['./index.html', './**/*.{vue,js,ts,jsx,tsx}'],
+  content: ['./**/*.{vue,js,ts,jsx,tsx}'],
   plugins: [
     addDynamicIconSelectors()
   ]

@@ -11,6 +11,3 @@ chrome.devtools.panels.create(
 
 <template>
 </template>
-
-<style scoped lang="scss">
-</style>
