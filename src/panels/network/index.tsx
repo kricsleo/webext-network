@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react'
 import { createRoot } from "react-dom/client"
 import RequestItem from './RequestItem'
 
-import "~base.css"
-import "~style.css"
-
 const FontPicker = () => {
   const [har, setHar] = useState<any>()
   const [listened, setListened] = useState(false)
