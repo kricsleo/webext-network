@@ -32,6 +32,7 @@ const FontPicker = () => {
   })
   return (
     <>
+      <span className='icon-[carbon--deployment-policy]' />
       <p className="border-2 border-sky-500">total: {requests.length}</p>
       {requests.map(request => <RequestItem request={request} />)}
       {/* <pre>{JSON.stringify(har, null, 2)}</pre> */}
