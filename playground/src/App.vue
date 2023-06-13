@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import RequestItem from './components/RequestItem.vue';
+import RequestFilter from './components/RequestFilter.vue';
+import { useFilterRequests } from './composables/request'
 
 const requests = reactive<chrome.webRequest.WebRequestBodyDetails[]>([
   {
@@ -44,14 +46,63 @@ const requests = reactive<chrome.webRequest.WebRequestBodyDetails[]>([
     "timeStamp": 1686641621469.001,
     "type": "xmlhttprequest",
     "url": "http://localhost:3333/"
+  },
+  {
+    "documentId": "CDE12EA0B1EF605AFE153BFB07341EFC",
+    "documentLifecycle": "active",
+    "frameId": 0,
+    "frameType": "outermost_frame",
+    "initiator": "http://localhost:3333",
+    "method": "GET",
+    "parentFrameId": -1,
+    "requestId": "11330",
+    "tabId": 364878956,
+    "timeStamp": 1686641621469.001,
+    "type": "xmlhttprequest",
+    "url": "http://localhost:3333/"
+  },
+  {
+    "documentId": "CDE12EA0B1EF605AFE153BFB07341EFC",
+    "documentLifecycle": "active",
+    "frameId": 0,
+    "frameType": "outermost_frame",
+    "initiator": "http://localhost:3333",
+    "method": "GET",
+    "parentFrameId": -1,
+    "requestId": "11330",
+    "tabId": 364878956,
+    "timeStamp": 1686641621469.001,
+    "type": "xmlhttprequest",
+    "url": "http://localhost:3333/"
+  },
+  {
+    "documentId": "CDE12EA0B1EF605AFE153BFB07341EFC",
+    "documentLifecycle": "active",
+    "frameId": 0,
+    "frameType": "outermost_frame",
+    "initiator": "http://localhost:3333",
+    "method": "GET",
+    "parentFrameId": -1,
+    "requestId": "11330",
+    "tabId": 364878956,
+    "timeStamp": 1686641621469.001,
+    "type": "xmlhttprequest",
+    "url": "http://localhost:3333/"
   }
 ])
+const filteredRequests = useFilterRequests(requests)
 </script>
 
 <template>
-  <div font-sans p="x-4 y-10" text="center gray-700 dark:gray-200">
-    <main>
-      <RequestItem v-for="request in requests" :key="request.requestId" :request="request" />
-    </main>
-  </div>
+  <main class="h-full flex flex-col">
+    <RequestFilter />
+    <div class="grow overflow-auto">
+      <RequestItem 
+        v-for="(request, idx) in filteredRequests"
+        :key="request.requestId" 
+        :request="request"
+        :class="[idx % 2 === 1 ? 'bg-[#232424]' : 'bg-[#292929]', 'hover:bg-[#182436]']" />
+      <p v-if="!filteredRequests.length" class="text-center opacity-60">No requests found</p>
+    </div>
+  </main>
 </template>
