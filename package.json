@@ -11,8 +11,10 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@plasmohq/storage": "^1.6.1",
     "@vueuse/core": "^10.1.2",
     "plasmo": "0.75.2",
+    "splitpanes": "^3.1.5",
     "vue": "^3.3.4"
   },
   "devDependencies": {

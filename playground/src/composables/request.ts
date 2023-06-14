@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { Rule, RequestMeta } from '../types'
+import { Rule, RequestMeta } from '../../../src/panels/network/types'
 import { useAsyncStorage } from './storage'
 
 export interface RequestTypeConfig {
