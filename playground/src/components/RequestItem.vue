@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRequestTypeConfig } from '../composables/request'
+import { RequestMeta } from '../types'
 
 const props = defineProps<{
-  request: chrome.webRequest.WebRequestBodyDetails
+  request: RequestMeta
 }>()
 
 const url = computed(() => new URL(props.request.url))

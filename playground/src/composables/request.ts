@@ -1,43 +1,53 @@
 import { computed, ref } from 'vue'
+import { RequestMeta } from '../types'
 
 export interface RequestTypeConfig {
   icon: string
   label: string
-  type: chrome.webRequest.ResourceType[]
+  types: chrome.webRequest.ResourceType[]
 }
-const fallbackRequestTypeConfig: RequestTypeConfig = { icon: 'icon-[carbon--search]', type: ['other', 'object', 'ping', 'csp_report'], label: 'Other' }
+const fallbackRequestTypeConfig: RequestTypeConfig = { icon: 'icon-[carbon--search]', types: ['other', 'object', 'ping', 'csp_report'], label: 'Other' }
 export const requestTypeConfigs: RequestTypeConfig[] = [
-  { icon: '', type: [], label: 'All' },
-  { icon: 'icon-[carbon--send]', type: ['xmlhttprequest'], label: 'Fetch/XHR' },
-  { icon: 'icon-[carbon--code]', type: ['script'], label: 'JS' },
-  { icon: 'icon-[carbon--color-palette]', type: ['stylesheet'], label: 'CSS' },
-  { icon: 'icon-[carbon--image]', type: ['image'], label: 'IMG' },
-  { icon: 'icon-[carbon--video]', type: ['media'], label: 'Media' },
-  { icon: 'icon-[carbon--document]', type: ['main_frame', 'sub_frame'], label: 'DOC' },
-  { icon: 'icon-[carbon--text-font]', type: ['font'], label: 'Font'},
-  { icon: 'icon-[carbon--arrows-horizontal]', type: ['websocket'], label: 'WS' },
+  { icon: '', types: [], label: 'All' },
+  { icon: 'icon-[carbon--send]', types: ['xmlhttprequest'], label: 'Fetch/XHR' },
+  { icon: 'icon-[carbon--code]', types: ['script'], label: 'JS' },
+  { icon: 'icon-[carbon--color-palette]', types: ['stylesheet'], label: 'CSS' },
+  { icon: 'icon-[carbon--image]', types: ['image'], label: 'IMG' },
+  { icon: 'icon-[carbon--video]', types: ['media'], label: 'Media' },
+  { icon: 'icon-[carbon--document]', types: ['main_frame', 'sub_frame'], label: 'DOC' },
+  { icon: 'icon-[carbon--text-font]', types: ['font'], label: 'Font'},
+  { icon: 'icon-[carbon--arrows-horizontal]', types: ['websocket'], label: 'WS' },
   fallbackRequestTypeConfig,
 ]
 
-export function useRequestTypeConfig(request: chrome.webRequest.WebRequestDetails) {
+export function useRequestTypeConfig(request: RequestMeta) {
   return computed(() => {
-    const typeConfig = requestTypeConfigs.find(t => t.type.includes(request.type))
+    const typeConfig = requestTypeConfigs.find(t => t.types.includes(request.type))
     return typeConfig || fallbackRequestTypeConfig
   })
 }
 
-export const activeRequestType = ref<RequestTypeConfig['type']>([])
+export const activeRequestTypes = ref<RequestTypeConfig['types']>([])
 export const requestFilter = ref('')
-export function toggleActiveRequestType(type: RequestTypeConfig['type']) {
-  activeRequestType.value = type
+export function toggleActiveRequestTypes(types: RequestTypeConfig['types'], event: MouseEvent) {
+  if (event.metaKey && types.length && activeRequestTypes.value.length) {
+    const isAlreadyActive = types.every(t => activeRequestTypes.value.includes(t))
+    if(isAlreadyActive) {
+      activeRequestTypes.value = activeRequestTypes.value.filter(t => !types.includes(t))
+    } else {
+      activeRequestTypes.value.push(...types)
+    } 
+  } else {
+    activeRequestTypes.value = types.slice()
+  }
 }
 export function setRequestFilter(filter: string) {
   requestFilter.value = filter
 }
-export function useFilterRequests(requests: chrome.webRequest.WebRequestDetails[]) {
+export function useFilterRequests(requests: RequestMeta[]) {
   const filterReg = computed(() => createReg(requestFilter.value))
   return computed(() => requests.filter(
-    request => (!activeRequestType.value.length || activeRequestType.value.includes(request.type))
+    request => (!activeRequestTypes.value.length || activeRequestTypes.value.includes(request.type))
       && (!requestFilter.value || filterReg.value.test(request.url))
   ))
 }

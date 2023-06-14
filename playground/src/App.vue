@@ -3,8 +3,9 @@ import { reactive } from 'vue';
 import RequestItem from './components/RequestItem.vue';
 import RequestFilter from './components/RequestFilter.vue';
 import { useFilterRequests } from './composables/request'
+import { RequestMeta } from './types'
 
-const requests = reactive<chrome.webRequest.WebRequestBodyDetails[]>([
+const requests = reactive<RequestMeta[]>([
   {
     "documentId": "A52AAA6E61357B20444859F354B2718E",
     "documentLifecycle": "active",
@@ -96,7 +97,7 @@ const filteredRequests = useFilterRequests(requests)
 <template>
   <main class="h-full flex flex-col">
     <RequestFilter />
-    <div class="grow overflow-auto">
+    <div class="grow overflow-auto p-2">
       <RequestItem 
         v-for="(request, idx) in filteredRequests"
         :key="request.requestId" 

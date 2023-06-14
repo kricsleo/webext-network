@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { requestTypeConfigs, activeRequestType, toggleActiveRequestType, requestFilter } from '../composables/request'
+import { requestTypeConfigs, activeRequestTypes, toggleActiveRequestTypes, requestFilter } from '../composables/request'
 
-const typeConfigs = computed(() => requestTypeConfigs.map(typeConfig => {
-  const active = (!typeConfig.type.length && !activeRequestType.value.length)
-    || (typeConfig.type.length && typeConfig.type.every(type => activeRequestType.value.includes(type)))
-  return { ...typeConfig, active }
+const typeConfigs = computed(() => requestTypeConfigs.map(t => {
+  const active = Boolean(!t.types.length && !activeRequestTypes.value.length)
+    || Boolean(t.types.length && t.types.every(type => activeRequestTypes.value.includes(type)))
+  return { ...t, active }
 }))
 </script>
 
 <template>
   <div class="flex items-center gap-1 flex-wrap py-1 px-2">
-    <div class="relative bg-black px-1">
+    <div class="relative bg-black px-1 rounded-[2px]">
       <input 
         v-model="requestFilter" 
         class="bg-transparent outline-none pr-5" 
@@ -22,10 +22,10 @@ const typeConfigs = computed(() => requestTypeConfigs.map(typeConfig => {
         @click="requestFilter = ''" />
     </div>
     <template v-for="(type, idx) in typeConfigs" :key="type.label">
-      <div v-if="idx !== 0" class="bg-gray-400 w-[1px] h-3" />
+      <div v-if="idx !== 0" class="bg-gray-500 w-[1px] h-3" />
       <button 
-        :class="['flex items-center gap-[2px] hover:text-gray-50 px-1.5 rounded leading-5', { 'bg-[#454545] text-gray-50': type.active }]"
-        @click="toggleActiveRequestType(type.type)">
+        :class="['flex items-center gap-[2px] hover:text-gray-50 px-1.5 rounded leading-5', { 'bg-gray-600 text-gray-50': type.active }]"
+        @click="toggleActiveRequestTypes(type.types, $event)">
         <span v-if="type.icon" :class="type.icon" />
         <span>{{ type.label }}</span>
       </button>
