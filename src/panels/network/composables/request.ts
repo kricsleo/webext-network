@@ -1,4 +1,4 @@
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import { Rule, RequestMeta } from '../../../src/panels/network/types'
 import { useStorageAsync } from '@vueuse/core'
 
@@ -31,6 +31,7 @@ export function useRequestTypeConfig(request: RequestMeta) {
 export const activeRequestTypes = useStorageAsync('@request/active-request-types', [] as RequestTypeConfig['types'])
 export const requestFilter = useStorageAsync('@request/filter', '')
 export const rules = useStorageAsync('@request/rules', [] as Rule[])
+export const requests = reactive<RequestMeta[]>([])
 
 export function toggleActiveRequestTypes(types: RequestTypeConfig['types'], event: MouseEvent) {
   if (event.metaKey && types.length && activeRequestTypes.value.length) {

@@ -3,13 +3,12 @@ import { reactive, onBeforeMount } from 'vue';
 import RequestItem from './components/RequestItem.vue';
 import RequestFilter from './components/RequestFilter.vue';
 import RuleItem from './components/RuleItem.vue';
-import { rules, useFilterRequests } from './composables/request'
+import { rules, useFilterRequests, requests } from './composables/request'
 import { RequestMeta } from './types'
 // @ts-ignore
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 
-const requests = reactive<RequestMeta[]>([])
 const filteredRequests = useFilterRequests(requests)
 
 onBeforeMount(() => {

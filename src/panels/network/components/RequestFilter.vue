@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { requestTypeConfigs, activeRequestTypes, toggleActiveRequestTypes, requestFilter } from '../composables/request'
+import { requestTypeConfigs, activeRequestTypes, toggleActiveRequestTypes, requestFilter, requests } from '../composables/request'
 
 const typeConfigs = computed(() => requestTypeConfigs.map(t => {
   const active = Boolean(!t.types.length && !activeRequestTypes.value.length)
     || Boolean(t.types.length && t.types.every(type => activeRequestTypes.value.includes(type)))
-  return { ...t, active }
+  const count = requests.filter(request => !t.types.length || t.types.includes(request.type)).length
+  return { ...t, active, count }
 }))
 </script>
 
@@ -28,6 +29,7 @@ const typeConfigs = computed(() => requestTypeConfigs.map(t => {
         @click="toggleActiveRequestTypes(type.types, $event)">
         <span v-if="type.icon" :class="type.icon" />
         <span>{{ type.label }}</span>
+        <span v-if="type.count" class="text-xs opacity-65">({{ type.count }})</span>
       </button>
     </template>
   </div>
