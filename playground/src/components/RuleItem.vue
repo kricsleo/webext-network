@@ -7,5 +7,5 @@ defineProps<{
 </script>
 
 <template>
-  <p>{{ rule }}</p>
+  <p style="word-break: break-all;">{{ rule }}</p>
 </template>

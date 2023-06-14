@@ -24,6 +24,6 @@ class AsyncStorage implements StorageLikeAsync {
 const asyncStorage = new AsyncStorage()
 
 export function useAsyncStorage<T>(key: string, initialValue: MaybeRefOrGetter<T>) {
-  return useStorageAsync<T>(key, initialValue, asyncStorage, { mergeDefaults: true })
-  // return useStorageAsync<T>(key, initialValue, localStorage, { mergeDefaults: true })
+  // return useStorageAsync<T>(key, initialValue, asyncStorage, { mergeDefaults: true })
+  return useStorageAsync<T>(key, initialValue, localStorage, { mergeDefaults: true })
 }

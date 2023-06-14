@@ -101,8 +101,8 @@ const filteredRequests = useFilterRequests(requests)
 <template>
   <main class="h-full flex flex-col">
     <RequestFilter />
-    <Splitpanes class="grow">
-      <Pane class="overflow-auto p-2">
+    <Splitpanes class="grow overflow-hidden">
+      <Pane class="!overflow-auto p-2">
         <RequestItem 
           v-for="(request, idx) in filteredRequests"
           :key="request.requestId" 
@@ -110,7 +110,7 @@ const filteredRequests = useFilterRequests(requests)
           :class="[idx % 2 === 1 ? 'bg-[#232424]' : 'bg-[#292929]', 'hover:bg-[#182436]']" />
         <p v-if="!filteredRequests.length" class="text-center opacity-60">No requests found</p>
       </Pane>
-      <Pane class="overflow-auto p-2">
+      <Pane class="!overflow-auto p-2">
         <RuleItem v-for="rule in rules" :key="rule.id" :rule="rule" />
       </Pane>
     </Splitpanes>
