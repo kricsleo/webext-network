@@ -1,4 +1,4 @@
-export type RequestMeta = chrome.webRequest.WebRequestBodyDetails
+export type RequestMeta = chrome.webRequest.WebRequestDetails
 
 export type PendingType = 'none' | 'forever' | 'resolve' | 'reject'
 

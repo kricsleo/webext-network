@@ -1,4 +1,4 @@
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import { Rule, RequestMeta } from '../../../src/panels/network/types'
 import { useStorageAsync } from '@vueuse/core'
 
@@ -31,6 +31,30 @@ export function useRequestTypeConfig(request: RequestMeta) {
 export const activeRequestTypes = useStorageAsync('@request/active-request-types', [] as RequestTypeConfig['types'])
 export const requestFilter = useStorageAsync('@request/filter', '')
 export const rules = useStorageAsync('@request/rules', [] as Rule[])
+export const requests = reactive<RequestMeta[]>([
+  {
+    "frameId": 0,
+    "initiator": "https://photos.kric.cc",
+    "method": "GET",
+    "parentFrameId": -1,
+    "requestId": "11105",
+    "tabId": 364878968,
+    "timeStamp": 1686641527261.345,
+    "type": "image",
+    "url": "https://images.unsplash.com/photo-1662010021854-e67c538ea7a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0MDM2MTl8MXwxfGFsbHwxfHx8fHx8Mnx8MTY4NjY0MTUyN3w&ixlib=rb-4.0.3&q=80&w=1080"
+  },
+  {
+    "frameId": 0,
+    "initiator": "https://photos.kric.cc",
+    "method": "GET",
+    "parentFrameId": -1,
+    "requestId": "11155",
+    "tabId": 364878968,
+    "timeStamp": 1686641527265.7822,
+    "type": "image",
+    "url": "https://images.unsplash.com/photo-1686495728202-d80f2a4f1496?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0MDM2MTl8MHwxfGFsbHwyOXx8fHx8fDJ8fDE2ODY2NDE1Mjd8&ixlib=rb-4.0.3&q=80&w=1080"
+  },
+])
 
 export function toggleActiveRequestTypes(types: RequestTypeConfig['types'], event: MouseEvent) {
   if (event.metaKey && types.length && activeRequestTypes.value.length) {
