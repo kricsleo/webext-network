@@ -111,6 +111,7 @@ const filteredRequests = useFilterRequests(requests)
         <p v-if="!filteredRequests.length" class="text-center opacity-60">No requests found</p>
       </Pane>
       <Pane class="!overflow-auto p-2">
+        <span class="icon-[carbon--clean]" @click="rules = []" />
         <RuleItem v-for="rule in rules" :key="rule.id" :rule="rule" />
       </Pane>
     </Splitpanes>
