@@ -2,7 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-html.dark {
-  background-color: #1f2124;
-  color: #bec5cf;
+:root {
+  --text: #222222;
+  --text-highlight: #0f0f0f;
+  --text-soft: rgba(34,34,34,0.62);
+  --bg: #fff;
+  --bg-soft: #e9e9e9;
+  --font-mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+}
+
+:root.dark {
+  --text: rgba(255,255,255,0.72);
+  --text-soft: rgba(255,255,255,0.52);
+  --text-highlight: rgba(255,255,255,0.82);
+  --bg: #1C2126;
+  --bg-soft: #2d343d;
+}
+
+html, body, #app {
+  height: 100%;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+::-webkit-scrollbar {
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--bg);
+}
+::-webkit-resizer,
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-track {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 999rem;
+  background-color: var(--text-soft);
+  border: 4px solid transparent;
+  background-clip: content-box;
+}
+
+input {
+  background: transparent;
+  outline: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

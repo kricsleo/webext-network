@@ -4,7 +4,6 @@ import RequestItem from './components/RequestItem.vue';
 import RequestFilter from './components/RequestFilter.vue';
 import { useFilterRequests } from './composables/request'
 import { RequestMeta } from './types'
-import PendingSelect from './components/PendingSelect.vue';
 
 const requests = reactive<RequestMeta[]>([
   {

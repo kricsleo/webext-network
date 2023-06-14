@@ -4,7 +4,7 @@ const { addDynamicIconSelectors } = require('@iconify/tailwind');
 module.exports = {
   mode: "jit",
   darkMode: "class",
-  content: ["./**/*.vue"],
+  content: ["./**/*.{vue,ts}"],
   plugins: [
     addDynamicIconSelectors()
   ]
