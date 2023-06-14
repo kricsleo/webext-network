@@ -2,7 +2,7 @@
 import fontPickerHTML from "url:./panels/network/index.html"
 
 chrome.devtools.panels.create(
-  "Network Extra",
+  "Request",
   null,
   // See: https://github.com/PlasmoHQ/plasmo/issues/106#issuecomment-1188539625
   fontPickerHTML.split("/").pop(),

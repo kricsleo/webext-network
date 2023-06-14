@@ -56,6 +56,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.splitpanes--vertical>.splitpanes__splitter {
+.splitpanes--vertical > .splitpanes__splitter {
   background-color: #2d343d;
 }
