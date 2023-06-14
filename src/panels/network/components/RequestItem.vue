@@ -8,7 +8,11 @@ const props = defineProps<{
   request: RequestMeta
 }>()
 
-const url = computed(() => new URL(props.request.url))
+const path = computed(() => {
+  const url = new URL(props.request.url)
+  const lastPath = url.pathname.split('/').reverse()[0]
+  return  '/' + lastPath + url.search + url.hash
+})
 const type = useRequestTypeConfig(props.request)
 </script>
 
@@ -16,6 +20,6 @@ const type = useRequestTypeConfig(props.request)
   <div class='font-mono p-1 flex items-center gap-1'>
     <span :class="[type.icon, 'mr-1']" />
     <PendingSelect />
-    {{ url.pathname }}
+    {{ path }}
   </div>
 </template>

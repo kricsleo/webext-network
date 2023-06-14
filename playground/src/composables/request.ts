@@ -1,5 +1,6 @@
-import { computed, ref } from 'vue'
-import { RequestMeta } from '../types'
+import { computed } from 'vue'
+import { Rule, RequestMeta } from '../types'
+import { useAsyncStorage } from './storage'
 
 export interface RequestTypeConfig {
   icon: string
@@ -27,8 +28,10 @@ export function useRequestTypeConfig(request: RequestMeta) {
   })
 }
 
-export const activeRequestTypes = ref<RequestTypeConfig['types']>([])
-export const requestFilter = ref('')
+export const activeRequestTypes = useAsyncStorage('@request/active-request-types', [] as RequestTypeConfig['types'])
+export const requestFilter = useAsyncStorage('@request/filter', '')
+export const rules = useAsyncStorage('@request/rules', [] as Rule[])
+
 export function toggleActiveRequestTypes(types: RequestTypeConfig['types'], event: MouseEvent) {
   if (event.metaKey && types.length && activeRequestTypes.value.length) {
     const isAlreadyActive = types.every(t => activeRequestTypes.value.includes(t))

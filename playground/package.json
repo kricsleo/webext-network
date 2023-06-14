@@ -7,8 +7,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@plasmohq/storage": "^1.6.1",
     "@types/chrome": "^0.0.237",
     "@vueuse/core": "^10.1.2",
+    "splitpanes": "^3.1.5",
     "vue": "^3.2.47"
   },
   "devDependencies": {
