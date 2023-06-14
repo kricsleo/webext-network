@@ -45,3 +45,13 @@ html {
   border: 4px solid transparent;
   background-clip: content-box;
 }
+
+input {
+  background: transparent;
+  outline: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -11,10 +11,10 @@ const typeConfigs = computed(() => requestTypeConfigs.map(t => {
 
 <template>
   <div class="flex items-center gap-1 flex-wrap py-1 px-2">
-    <div class="relative bg-black px-1 rounded-[2px]">
+    <div class="relative bg-black px-1 rounded-sm">
       <input 
         v-model="requestFilter" 
-        class="bg-transparent outline-none pr-5" 
+        class="pr-5" 
         placeholder="Filter" />
       <button 
         v-if="requestFilter" 

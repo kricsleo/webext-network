@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRequestTypeConfig } from '../composables/request'
 import { RequestMeta } from '../types'
+import PendingSelect from './PendingSelect.vue'
 
 const props = defineProps<{
   request: RequestMeta
@@ -12,8 +13,9 @@ const type = useRequestTypeConfig(props.request)
 </script>
 
 <template>
-  <div className='font-mono p-1 border-b border-gray-600 flex items-center'>
+  <div class='font-mono p-1 flex items-center gap-1'>
     <span :class="[type.icon, 'mr-1']" />
+    <PendingSelect />
     {{ url.pathname }}
   </div>
 </template>
