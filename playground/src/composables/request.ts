@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import { Rule, RequestMeta } from '../../../src/panels/network/types'
-import { useAsyncStorage } from './storage'
+import { useStorageAsync } from '@vueuse/core'
 
 export interface RequestTypeConfig {
   icon: string
@@ -28,9 +28,9 @@ export function useRequestTypeConfig(request: RequestMeta) {
   })
 }
 
-export const activeRequestTypes = useAsyncStorage('@request/active-request-types', [] as RequestTypeConfig['types'])
-export const requestFilter = useAsyncStorage('@request/filter', '')
-export const rules = useAsyncStorage('@request/rules', [] as Rule[])
+export const activeRequestTypes = useStorageAsync('@request/active-request-types', [] as RequestTypeConfig['types'])
+export const requestFilter = useStorageAsync('@request/filter', '')
+export const rules = useStorageAsync('@request/rules', [] as Rule[])
 
 export function toggleActiveRequestTypes(types: RequestTypeConfig['types'], event: MouseEvent) {
   if (event.metaKey && types.length && activeRequestTypes.value.length) {
