@@ -12,21 +12,28 @@ import 'splitpanes/dist/splitpanes.css'
 const filteredRequests = useFilterRequests(requests)
 
 onBeforeMount(() => {
-  const listerner = (request: RequestMeta)  => {
+  const beforeRequestListerner = (request: RequestMeta)  => {
     requests.push(request)
     // todo: replace with regex
     let shouldPending = rules.value.some(rule => rule.filter === request.url)
     // todo: this lock html
-    while(shouldPending) {
-      shouldPending = rules.value.some(rule => rule.filter === request.url)
+    const start = Date.now()
+    const timeout = 3000
+    while(shouldPending && Date.now() - start < timeout) {
+      // shouldPending = rules.value.some(rule => rule.filter === request.url)
     }
   }
+  const navigateListener = () => requests.length = 0
   chrome.webRequest.onBeforeRequest.addListener(
-    listerner,
+    beforeRequestListerner,
     {urls: ["<all_urls>"]},
     ["blocking"]
   )
-  return () => chrome.webRequest.onBeforeRequest.removeListener(listerner)
+  chrome.devtools.network.onNavigated.addListener(navigateListener)
+  return () => {
+    chrome.webRequest.onBeforeRequest.removeListener(beforeRequestListerner)
+    chrome.devtools.network.onNavigated.removeListener(navigateListener)
+  }
 })
 </script>
 
