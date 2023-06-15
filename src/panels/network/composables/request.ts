@@ -7,17 +7,17 @@ export interface RequestTypeConfig {
   label: string
   types: chrome.webRequest.ResourceType[]
 }
-const fallbackRequestTypeConfig: RequestTypeConfig = { icon: 'icon-[carbon--search]', types: ['other', 'object', 'ping', 'csp_report'], label: 'Other' }
+const fallbackRequestTypeConfig: RequestTypeConfig = { icon: 'icon-[carbon--search] text-blue-400', types: ['other', 'object', 'ping', 'csp_report'], label: 'Other' }
 export const requestTypeConfigs: RequestTypeConfig[] = [
   { icon: '', types: [], label: 'All' },
-  { icon: 'icon-[carbon--send]', types: ['xmlhttprequest'], label: 'Fetch/XHR' },
-  { icon: 'icon-[carbon--code]', types: ['script'], label: 'JS' },
-  { icon: 'icon-[carbon--color-palette]', types: ['stylesheet'], label: 'CSS' },
-  { icon: 'icon-[carbon--image]', types: ['image'], label: 'IMG' },
-  { icon: 'icon-[carbon--video]', types: ['media'], label: 'Media' },
-  { icon: 'icon-[carbon--document]', types: ['main_frame', 'sub_frame'], label: 'DOC' },
-  { icon: 'icon-[carbon--text-font]', types: ['font'], label: 'Font'},
-  { icon: 'icon-[carbon--arrows-horizontal]', types: ['websocket'], label: 'WS' },
+  { icon: 'icon-[carbon--send] text-blue-400', types: ['xmlhttprequest'], label: 'Fetch/XHR' },
+  { icon: 'icon-[carbon--code] text-blue-400', types: ['script'], label: 'JS' },
+  { icon: 'icon-[carbon--color-palette] text-blue-400', types: ['stylesheet'], label: 'CSS' },
+  { icon: 'icon-[carbon--image] text-blue-400', types: ['image'], label: 'IMG' },
+  { icon: 'icon-[carbon--video] text-blue-400', types: ['media'], label: 'Media' },
+  { icon: 'icon-[carbon--document] text-blue-400', types: ['main_frame', 'sub_frame'], label: 'DOC' },
+  { icon: 'icon-[carbon--text-font] text-blue-400', types: ['font'], label: 'Font'},
+  { icon: 'icon-[carbon--arrows-horizontal] text-blue-400', types: ['websocket'], label: 'WS' },
   fallbackRequestTypeConfig,
 ]
 

@@ -55,13 +55,11 @@ onMounted(() => {
         <p v-if="!filteredRequests.length" class="flex items-center justify-center opacity-60">No requests found</p>
       </Pane>
       <Pane class="!overflow-auto p-2" :size="100 - panelSize">
-        <div class="py-1">
-          <button 
-            v-if="rules.length" 
-            class="icon-[carbon--error] text-base" 
-            @click="rules = []" title="clean rules" />
-        </div>
-        <RuleItem v-for="rule in rules" :key="rule.id" :rule="rule" />
+        <RuleItem 
+          v-for="(rule, idx) in rules" 
+          :key="rule.id" 
+          :rule="rule"
+          :class="[idx % 2 === 1 ? 'bg-[#232424]' : 'bg-[#292929]', 'hover:bg-[#182436]']" />
       </Pane>
     </Splitpanes>
   </main>
