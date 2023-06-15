@@ -18,7 +18,7 @@ onBeforeMount(() => {
     let shouldPending = rules.value.some(rule => rule.filter === request.url)
     // todo: this lock html
     const start = Date.now()
-    const timeout = 3000
+    const timeout = 1000
     while(shouldPending && Date.now() - start < timeout) {
       // shouldPending = rules.value.some(rule => rule.filter === request.url)
     }
@@ -41,7 +41,7 @@ onBeforeMount(() => {
   <main class="h-full flex flex-col">
     <RequestFilter />
     <Splitpanes class="grow overflow-hidden">
-      <Pane class="!overflow-auto p-2">
+      <Pane class="!overflow-auto">
         <RequestItem 
           v-for="(request, idx) in filteredRequests"
           :key="request.requestId" 
@@ -53,7 +53,7 @@ onBeforeMount(() => {
         <div class="py-1">
           <button 
             v-if="rules.length" 
-            class="icon-[carbon--clean]" 
+            class="icon-[carbon--error] text-base" 
             @click="rules = []" title="clean rules" />
         </div>
         <RuleItem v-for="rule in rules" :key="rule.id" :rule="rule" />

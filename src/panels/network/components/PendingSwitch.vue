@@ -26,8 +26,8 @@ function toggleRule() {
 
 <template>
   <button 
-    :class="['flex items-center gap-1 p-2 rounded-full hover:bg-gray-700']"
+    :class="['flex items-center p-1.5 rounded-full hover:bg-gray-700']"
     @click="toggleRule">
-    <span :class="['inline-block rounded-full w-2 h-2', pending ? 'bg-blue-400' : 'bg-green-400']" />
+    <span :class="['inline-block rounded-full w-2 h-2', pending ? 'bg-orange-400' : 'bg-green-400']" />
   </button>
 </template>

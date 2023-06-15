@@ -1,4 +1,4 @@
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { Rule, RequestMeta } from '../../../src/panels/network/types'
 import { useStorageAsync } from '@vueuse/core'
 
@@ -33,6 +33,10 @@ export const requestFilter = useStorageAsync('@request/filter', '')
 export const rules = useStorageAsync('@request/rules', [] as Rule[])
 export const requests = reactive<RequestMeta[]>([])
 
+watch(requestFilter, () => {
+  console.log('changeding', requestFilter.value)
+})
+
 export function toggleActiveRequestTypes(types: RequestTypeConfig['types'], event: MouseEvent) {
   if (event.metaKey && types.length && activeRequestTypes.value.length) {
     const isAlreadyActive = types.every(t => activeRequestTypes.value.includes(t))
@@ -44,9 +48,6 @@ export function toggleActiveRequestTypes(types: RequestTypeConfig['types'], even
   } else {
     activeRequestTypes.value = types.slice()
   }
-}
-export function setRequestFilter(filter: string) {
-  requestFilter.value = filter
 }
 export function useFilterRequests(requests: RequestMeta[]) {
   const filterReg = computed(() => createReg(requestFilter.value))

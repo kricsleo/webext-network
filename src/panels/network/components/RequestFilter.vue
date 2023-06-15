@@ -11,7 +11,11 @@ const typeConfigs = computed(() => requestTypeConfigs.map(t => {
 </script>
 
 <template>
-  <div class="flex items-center gap-1 flex-wrap py-1 px-2">
+  <div class="flex items-center flex-wrap gap-1 py-1 px-2">
+    <button 
+      class="icon-[carbon--error] px-1 text-base" 
+      @click="requests.length = 0" 
+      title="clean requests" />
     <div class="relative bg-black px-1 rounded-sm">
       <input 
         v-model="requestFilter" 

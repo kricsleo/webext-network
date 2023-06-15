@@ -18,10 +18,10 @@ const type = useRequestTypeConfig(props.request)
 </script>
 
 <template>
-  <div class='font-mono p-1 flex items-center gap-1'>
-    <span :class="[type.icon, 'shrink-0 mr-1']" />
+  <div class='font-mono pl-1.5 pr-1 flex items-center gap-1'>
     <!-- <PendingSelect class="shrink-0"  /> -->
-    <PendingSwitch :path="request.url" />
-    <span style="word-break: break-word;">{{ path }}</span>
+    <PendingSwitch class="shrink-0" :path="request.url" />
+    <span :class="[type.icon, 'shrink-0']" />
+    <span class="break-all">{{ path }}</span>
   </div>
 </template>
