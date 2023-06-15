@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, onMounted } from 'vue';
 import RequestItem from './components/RequestItem.vue';
 import RequestFilter from './components/RequestFilter.vue';
 import RuleItem from './components/RuleItem.vue';
@@ -11,8 +11,11 @@ import 'splitpanes/dist/splitpanes.css'
 
 const filteredRequests = useFilterRequests(requests)
 
-onBeforeMount(() => {
+onMounted(() => {
   const beforeRequestListerner = (request: RequestMeta)  => {
+    if(request.tabId !== chrome.devtools.inspectedWindow.tabId || request.method === 'OPTIONS') {
+      return
+    }
     requests.push(request)
     // todo: replace with regex
     let shouldPending = rules.value.some(rule => rule.filter === request.url)
