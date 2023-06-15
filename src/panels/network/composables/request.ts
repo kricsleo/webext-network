@@ -1,6 +1,6 @@
 import { computed, reactive, watch } from 'vue'
 import { Rule, RequestMeta } from '../../../src/panels/network/types'
-import { useStorageAsync } from '@vueuse/core'
+import { useLocalStorage } from '@vueuse/core'
 
 export interface RequestTypeConfig {
   icon: string
@@ -28,9 +28,9 @@ export function useRequestTypeConfig(request: RequestMeta) {
   })
 }
 
-export const activeRequestTypes = useStorageAsync('@request/active-request-types', [] as RequestTypeConfig['types'])
-export const requestFilter = useStorageAsync('@request/filter', '')
-export const rules = useStorageAsync('@request/rules', [] as Rule[])
+export const activeRequestTypes = useLocalStorage('@request/active-request-types', [] as RequestTypeConfig['types'])
+export const requestFilter = useLocalStorage('@request/filter', '')
+export const rules = useLocalStorage('@request/rules', [] as Rule[])
 export const requests = reactive<RequestMeta[]>([])
 
 watch(requestFilter, () => {

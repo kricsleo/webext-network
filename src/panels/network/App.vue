@@ -8,8 +8,10 @@ import { RequestMeta } from './types'
 // @ts-ignore
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
+import { useLocalStorage } from '@vueuse/core'
 
 const filteredRequests = useFilterRequests(requests)
+const panelSize = useLocalStorage('@request/panel-size', 70)
 
 onMounted(() => {
   const beforeRequestListerner = (request: RequestMeta)  => {
@@ -43,8 +45,8 @@ onMounted(() => {
 <template>
   <main class="h-full flex flex-col">
     <RequestFilter />
-    <Splitpanes class="grow overflow-hidden">
-      <Pane class="!overflow-auto">
+    <Splitpanes class="grow overflow-hidden" @resize="panelSize = $event[0].size">
+      <Pane class="!overflow-auto" :size="panelSize">
         <RequestItem 
           v-for="(request, idx) in filteredRequests"
           :key="request.requestId" 
@@ -52,7 +54,7 @@ onMounted(() => {
           :class="[idx % 2 === 1 ? 'bg-[#232424]' : 'bg-[#292929]', 'hover:bg-[#182436]']" />
         <p v-if="!filteredRequests.length" class="text-center opacity-60">No requests found</p>
       </Pane>
-      <Pane class="!overflow-auto p-2">
+      <Pane class="!overflow-auto p-2" :size="100 - panelSize">
         <div class="py-1">
           <button 
             v-if="rules.length" 
