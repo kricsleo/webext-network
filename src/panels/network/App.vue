@@ -52,7 +52,7 @@ onMounted(() => {
           :key="request.requestId" 
           :request="request"
           :class="[idx % 2 === 1 ? 'bg-[#232424]' : 'bg-[#292929]', 'hover:bg-[#182436]']" />
-        <p v-if="!filteredRequests.length" class="text-center opacity-60">No requests found</p>
+        <p v-if="!filteredRequests.length" class="flex items-center justify-center opacity-60">No requests found</p>
       </Pane>
       <Pane class="!overflow-auto p-2" :size="100 - panelSize">
         <div class="py-1">
