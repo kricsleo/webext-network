@@ -25,7 +25,7 @@ function restoreRule() {
   <div class="flex items-center gap-2 p-1 px-2">
     <template v-if="editing">
       <input 
-        class="w-full mr-auto" 
+        class="w-full mr-auto bg-black rounded-sm" 
         v-model="rule.filter" 
         @keydown.enter="editing = false"
         @keydown.esc="restoreRule" />
