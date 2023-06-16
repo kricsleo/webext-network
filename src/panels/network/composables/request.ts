@@ -33,10 +33,6 @@ export const requestFilter = useLocalStorage('@request/filter', '')
 export const rules = useLocalStorage('@request/rules', [] as Rule[])
 export const requests = reactive<RequestMeta[]>([])
 
-watch(requestFilter, () => {
-  console.log('changeding', requestFilter.value)
-})
-
 export function toggleActiveRequestTypes(types: RequestTypeConfig['types'], event: MouseEvent) {
   if (event.metaKey && types.length && activeRequestTypes.value.length) {
     const isAlreadyActive = types.every(t => activeRequestTypes.value.includes(t))
